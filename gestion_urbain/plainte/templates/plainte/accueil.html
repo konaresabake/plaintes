@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007BFF;
+            overflow: hidden;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        .navbar .right {
+            float: right;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        li strong {
+            color: #333;
+        }
+
+        .actions {
+            margin-left: 10px;
+        }
+
+        .actions a {
+            margin-right: 10px;
+            color: #007BFF;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styles pour les icônes */
+        i.fas {
+            margin-right: 8px;
+            color: #007BFF;
+        }
+
+        .actions a i {
+            margin-right: 5px;
+        }
+
+        .actions a:hover i {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation avec icônes -->
+    <div class="navbar">
+        <a href="{% url 'home' %}"><i class="fas fa-home"></i> Accueil</a>
+        <a href="{% url 'accueil' %}"><i class="fas fa-list"></i> Liste des signalements</a>
+        <a href="{% url 'ajout_plaintes' %}"><i class="fas fa-plus"></i> Ajouter un signalement</a>
+        <a href="{% url 'logout' %}" class="right"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content">
+        <p><i class="fas fa-user"></i> Bienvenue, {{ user.username }} !</p>
+
+        <h2>Les signalements ajoutés</h2>
+
+        <ul>
+            {% for report in plaintes %}
+                <li>
+                    <strong>{{ report.title }}</strong> - {{ report.get_category_display }} ({{ report.created_at }})
+                    <span class="actions">
+                        <a href="{% url 'detail_plainte' report.id %}"><i class="fas fa-eye"></i> Voir les détails</a>
+                        
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Signalements Urbains</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles de base */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F4F7FB;
+            color: #2C3E50;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #4D89F9;
+            padding: 15px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a i {
+            margin-right: 8px;
+        }
+
+        .navbar a:hover {
+            background-color: #2C3E50;
+            border-radius: 5px;
+        }
+
+        .navbar .right {
+            float: right;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://www.bien-dans-ma-ville.fr/front/img/signalement/avant.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+            background-blend-mode: multiply;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .btn {
+            background-color: #1ABC9C;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .hero .btn:hover {
+            background-color: #16A085;
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-left: 10px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-between; /* Espacement égal entre les éléments */
+            flex-wrap: nowrap; /* Empêche le retour à la ligne */
+            margin-top: 40px;
+        }
+
+        .feature {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%; /* Largeur fixe pour chaque élément */
+            margin: 0 10px; /* Espacement entre les éléments */
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            color: #4D89F9;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover .feature-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4D89F9;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar a {
+                float: none;
+                display: block;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .features {
+                flex-wrap: wrap; /* Permet le retour à la ligne */
+            }
+
+            .feature {
+                width: 100%; /* Prend toute la largeur sur mobile */
+                margin: 10px 0; /* Espacement vertical */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="{% url 'home' %}"><i class="fas fa-city"></i>Signalements Urbains</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'accueil' %}"><i class="fas fa-list-ul"></i>Signalements</a>
+            <a href="{% url 'logout' %}" class="right"><i class="fas fa-sign-out-alt"></i>Déconnexion</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="right"><i class="fas fa-user-plus"></i>Inscription</a>
+            <a href="{% url 'login' %}" class="right"><i class="fas fa-sign-in-alt"></i>Connexion</a>
+        {% endif %}
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1><i class="fas fa-hands-helping"></i> BIENVENUE</h1>
+        <h1>Signalements Urbains pour Mairie</h1>
+        <p>Une ville connectée au service de ses citoyens engagés</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'accueil' %}" class="btn">Voir les signalements <i class="fas fa-arrow-circle-right"></i></a>
+        {% else %}
+            <a href="{% url 'register' %}" class="btn">S'inscrire maintenant <i class="fas fa-hand-point-up"></i></a>
+        {% endif %}
+    </div>
+
+    <!-- Section À propos -->
+    <div class="section">
+        <h2><i class="fas fa-info-circle"></i> À propos de nous</h2>
+        <p>Notre plateforme permet aux citoyens de signaler des problèmes urbains (routes endommagées, coupures d'eau, éclairage défectueux) qui sont traités par la mairie pour améliorer la qualité de vie.</p>
+    </div>
+
+    <!-- Section Fonctionnalités -->
+    <div class="section">
+        <h2><i class="fas fa-star"></i> Nos Fonctionnalités</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <h3>Signalement Rapide</h3>
+                <p>Signalez un problème en quelques clics avec notre interface intuitive.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-search-location"></i></div>
+                <h3>Suivi en Direct</h3>
+                <p>Suivez l'avancement de votre signalement en temps réel.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h3>Communauté Active</h3>
+                <p>Participez à l'amélioration collective de votre ville.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a> | 
+            <a href="#"><i class="fas fa-shield-alt"></i> Confidentialité</a>
+        </p>
+        <p>&copy; 2023 Signalements Urbains. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

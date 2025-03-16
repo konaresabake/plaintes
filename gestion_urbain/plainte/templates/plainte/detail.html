@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du signalement : {{ report.title }}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007BFF;
+            overflow: hidden;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        .navbar .right {
+            float: right;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .report-details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-details p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .report-details strong {
+            color: #333;
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .actions a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .actions a:hover {
+            background-color: #0056b3;
+        }
+
+        .actions a.delete {
+            background-color: #dc3545;
+        }
+
+        .actions a.delete:hover {
+            background-color: #c82333;
+        }
+
+        /* Styles pour les icônes */
+        i.fas {
+            margin-right: 8px;
+            color: #007BFF;
+        }
+
+        .report-details strong i {
+            margin-right: 5px;
+        }
+
+        .actions a i {
+            margin-right: 5px;
+        }
+
+        .actions a.delete i {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation avec icônes -->
+    <div class="navbar">
+        <a href="{% url 'home' %}"><i class="fas fa-home"></i> Accueil</a>
+        <a href="{% url 'accueil' %}"><i class="fas fa-list"></i> Liste des signalements</a>
+        <a href="{% url 'ajout_plaintes' %}"><i class="fas fa-plus"></i> Ajouter un signalement</a>
+        <a href="{% url 'logout' %}" class="right"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content">
+        <h1>Détails du signalement : {{ report.title }}</h1>
+
+        <div class="report-details">
+            <p><strong><i class="fas fa-heading"></i> Titre :</strong> {{ report.title }}</p>
+            <p><strong><i class="fas fa-align-left"></i> Description :</strong> {{ report.description }}</p>
+            <p><strong><i class="fas fa-tag"></i> Catégorie :</strong> {{ report.get_category_display }}</p>
+            <p><strong><i class="fas fa-calendar"></i> Date de création :</strong> {{ report.created_at }}</p>
+        </div>
+
+        <!-- Actions disponibles pour l'utilisateur connecté -->
+            <div class="actions">
+                <a href="{% url 'modifier' report.id %}"><i class="fas fa-edit"></i> Modifier</a>
+                <a href="{% url 'supp' report.id %}" class="delete"><i class="fas fa-trash"></i> Supprimer</a>
+            </div>
+    </div>
+</body>
+</html>

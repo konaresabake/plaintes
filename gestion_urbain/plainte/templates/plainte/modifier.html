@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le signalement : {{ report.title }}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007BFF;
+            overflow: hidden;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        .navbar .right {
+            float: right;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        form p {
+            margin-bottom: 15px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        form button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styles pour les icônes */
+        i.fas {
+            margin-right: 8px;
+            color: #007BFF;
+        }
+
+        form label i {
+            margin-right: 5px;
+        }
+
+        button i {
+            margin-right: 5px;
+        }
+
+        a i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation avec icônes -->
+    <div class="navbar">
+        <a href="{% url 'home' %}"><i class="fas fa-home"></i> Accueil</a>
+        <a href="{% url 'accueil' %}"><i class="fas fa-list"></i> Liste des signalements</a>
+        <a href="{% url 'ajout_plaintes' %}"><i class="fas fa-plus"></i> Ajouter un signalement</a>
+        <a href="{% url 'logout' %}" class="right"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content">
+        <h1>Modifier le signalement : {{ report.title }}</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                <label for="id_title"><i class="fas fa-heading"></i> Titre</label>
+                {{ form.title }}
+            </p>
+            <p>
+                <label for="id_category"><i class="fas fa-tag"></i> Catégorie</label>
+                {{ form.category }}
+            </p>
+            <p>
+                <label for="id_description"><i class="fas fa-align-left"></i> Description</label>
+                {{ form.description }}
+            </p>
+            <button type="submit"><i class="fas fa-save"></i> Modifier</button>
+        </form>
+
+        <a href="{% url 'home' %}"><i class="fas fa-times"></i> Annuler</a>
+    </div>
+</body>
+</html>
