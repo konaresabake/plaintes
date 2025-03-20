@@ -147,7 +147,7 @@
         <ul>
             {% for report in plaintes %}
                 <li>
-                    <strong>{{ report.title }}</strong> - {{ report.get_category_display }} ({{ report.created_at }})
+                    <strong>{{ report.title }}</strong> - {{ report.get_category_display }} ({{ report.created_at }}) ({{ report.status }}) ({{ report.location }})
                     <span class="actions">
                         <a href="{% url 'detail_plainte' report.id %}"><i class="fas fa-eye"></i> Voir les détails</a>
                         
